@@ -124,7 +124,8 @@ function findElement(query) {
     if (!searchTerm) return null;
     return elements.find(element => 
         element.name.toLowerCase() === searchTerm || 
-        element.symbol.toLowerCase() === searchTerm
+        element.symbol.toLowerCase() === searchTerm ||
+        element.number.toString() === searchTerm // <-- ADDED THIS LINE
     );
 }
 
@@ -141,11 +142,11 @@ function displayElement(element) {
         </div>
         <div class="element-weight">${element.weight}</div>
     `;
-    
+    // Add the new panel to the results container
     resultsContainer.appendChild(panel);
 }
 
-
+// Function to create and display an error message
 function displayError(query) {
     resultsContainer.innerHTML = `
         <div class="error-message">
@@ -169,7 +170,6 @@ function performSearch() {
     }
 }
 
-
 searchButton.addEventListener('click', performSearch);
 
 searchInput.addEventListener('keyup', function(event) {
@@ -177,5 +177,3 @@ searchInput.addEventListener('keyup', function(event) {
         performSearch();
     }
 });
-
-
